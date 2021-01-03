@@ -1,30 +1,96 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel=”stylesheet” type=”text/css” href=”https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css">
-		<title>Hank Quinlan, Horrible Cop</title>
-		
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+<html lang="en">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <link rel="stylesheet" href="https://newcss.net/theme/night.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JKVargas blog</title>
+    </head>
+    <body>
+        <header>
+            <h1>Blog about software development</h1>
+        </header>
+
+        <h1>Algorithms</h1>
+        <ul>
+          <li>
+            <h4> Number of ways you can climb the stairs</h4>
+
+            <p>Consider a staircase, you can take n steps to reach the top. You can climb one or 2 steps each time. How many distinct ways you can climb to the top?</p>
+            <p>This is the kind of exercise that is not straightway to write the solution. Consider some stairs that you can take 4 steps to reach the top.<br>
+            These are your options to climb these stairs.<br>
+            1 step, 1 step, 1 step, 1 step<br>
+            1 step, 1 step, 2 steps <br>
+            1 step, 2 steps, 1 step,<br>
+            2 steps, 1 step, 1 step,<br>
+            2 steps, 2 steps<br>
+            </p>
+            <p>Kinda weird to think on a solution for this when the number go high, right? Well, people can use one technique called memoization to solve it. <br>
+            <a>https://en.wikipedia.org/wiki/Memoization</a><br>The main idea is that you are going to hold the results that you are getting in order to not 
+            have to calculate them again.<br> I am going to use the <a href="https://www.rust-lang.org/">Rust</a> language to describe to you how we can solve this problem.</p>
+            
+            <pre>
+struct Solution;
+
+impl Solution {
+    pub fn climb_stairs(n: i32) -> i32 {
+        // this struct is going to help us to hold the results 
+        // for the i'th step.
+        let mut memo: Vec<i32> = vec![0; n as usize + 1];
+
+        Self::check_stairs(0, n, &mut memo)
+    }
+
+    fn check_stairs(i: i32, n: i32, memo: &mut Vec<i32>) -> i32 {
+        // This will happen when the ith step is beyond
+        // the size of the stairs
+        if i > n {
+            return 0;
+        }
+
+        // If the i'th step is equal to the size of the stairs,
+        // that means that we reached the top. So that concludes
+        // one way on how to climb the stairs.
+        if i == n {
+            return 1;
+        }
+
+        // Here is the first magic point hehe
+        // If we have the memo filled for that step then just return
+        // it, so we don't have to calculate it again :) cool, right?
+        if memo[i as usize] > 0 {
+            return memo[i as usize];
+        }
+
+        // Here is the second magic point where the calculation happens.
+        // Mainly what we are saying here is basically,
+        // the number of options that we have to climb from the ith step 
+        // to the top is the sum of options for the next step plus the
+        // number of options for the current step plus 2.
+        memo[i as usize] = Self::check_stairs(i + 1, n, memo) 
+        + Self::check_stairs(i + 2, n, memo);
+
+        // Here we return the content from our memoization structure
+        memo[i as usize]
+    }
+}
+
+#[test]
+pub fn checks() {
+    assert_eq!(2, Solution::climb_stairs(2));
+    assert_eq!(3, Solution::climb_stairs(3));
+    assert_eq!(4, Solution::climb_stairs(5));
+}
+            </pre>
+
+          </li>
+        </ul>
+
+        <footer>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/jhonny-vargas-69467949/">Linkedin</a></li>
+            </ul>
+        </footer>
+    </body>
 </html>
