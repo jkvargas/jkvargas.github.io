@@ -18,15 +18,17 @@
             <h4> Number of ways you can climb the stairs</h4>
 
             <p>Consider a staircase, you can take n steps to reach the top. You can climb one or 2 steps each time. How many distinct ways you can climb to the top?</p>
-            <p>This is the kind of exercise that is not straightway to write the solution. Consider some stairs that you can take 4 steps to reach the top.<br>
-            These are your options to climb these stairs.<br>
+            <p>This is the kind of exercise that is not straightforward to write a solution. Consider some stairs that you can take 4 steps to reach the top.<br>
+            These are your options to climb it:<br>
             1 step, 1 step, 1 step, 1 step<br>
             1 step, 1 step, 2 steps <br>
             1 step, 2 steps, 1 step,<br>
             2 steps, 1 step, 1 step,<br>
             2 steps, 2 steps<br>
+            -----------------<br>
+            5 ways to climb it.
             </p>
-            <p>Kinda weird to think on a solution for this when the number go high, right? Well, people can use one technique called memoization to solve it. <br>
+            <p>Kinda weird to think on a solution for this. Specially when the number go high and you have so many ways to climb it, right? Well, people can use one technique called memoization to solve it. <br>
             <a>https://en.wikipedia.org/wiki/Memoization</a><br>The main idea is that you are going to hold the results that you are getting in order to not 
             have to calculate them again.<br> I am going to use the <a href="https://www.rust-lang.org/">Rust</a> language to describe to you how we can solve this problem.</p>
             
