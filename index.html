@@ -29,8 +29,10 @@
             5 ways to climb it.
             </p>
             <p>Kinda weird to think on a solution for this. Specially when the number go high and you have so many ways to climb it, right? Well, people can use one technique called memoization to solve it. <br>
-            <a>https://en.wikipedia.org/wiki/Memoization</a><br>The main idea is that you are going to hold the results that you are getting in order to not 
-            have to calculate them again.<br> I am going to use the <a href="https://www.rust-lang.org/">Rust</a> language to describe to you how we can solve this problem.</p>
+            <a>https://en.wikipedia.org/wiki/Memoization</a><br>The main idea is that you are going to hold the results that you are getting from minor problems in order to not 
+            have to calculate them again. Minor problems because you will need to break as you guessed, the main problem into smaller problems. For example, from the 4th to the 5th step on a n = 5 stairs, you have just one way to climb the stairs.<br>
+            
+            <br> I am going to use the <a href="https://www.rust-lang.org/">Rust</a> language to describe to you how we can solve this problem.</p>
             
             <pre>
 struct Solution;
